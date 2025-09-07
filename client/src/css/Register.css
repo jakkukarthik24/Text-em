@@ -1,0 +1,11 @@
+.clip-path-diagonal-reverse {
+  clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
+}
+@media (max-width: 1023px) {
+  .clip-path-diagonal-reverse {
+    clip-path: none;
+  }
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
