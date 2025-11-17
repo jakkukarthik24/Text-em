@@ -1,0 +1,27 @@
+.settings-component{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0;
+    
+}
+.settings-bottom{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.logout-btn{
+    width: 25%;
+    padding: 10px 0;
+    border-radius: 10px;
+    color: #fffefe;
+    border: 5px solid #262626;
+    background: rgb(234, 50, 50);
+    font-size: 24px;
+    cursor: pointer;
+
+}
+.logout-btn:hover {
+    background-color: #ff4c4c;
+    color: white;
+}

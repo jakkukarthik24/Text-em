@@ -25,11 +25,11 @@ function Login() {
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex items-center justify-center ">
+    <div className="bg-gray-900 h-screen flex items-center justify-center ">
 
       <div className="relative w-full max-w-4xl mx-auto">
 
-        <div className="flex flex-col lg:flex-row bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="flex flex-col lg:flex-row bg-gray-100 rounded-2xl shadow-2xl overflow-hidden">
           <div className="w-full lg:w-1/2 p-8 sm:p-12 flex flex-col justify-center">
 
             <h1 className="text-4xl font-bold text-gray-800 mb-4 text-center lg:text-left">

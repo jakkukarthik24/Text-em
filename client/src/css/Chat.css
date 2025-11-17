@@ -1,53 +1,98 @@
-.chat-container {
+
+.chat-page {
   display: flex;
   height: 100vh;
-  background-color: #f9fafb;
+  background-color: #111;
+  overflow: hidden;
 }
-.chat-sidebar {
+
+  .menubar {
+    width: 80px;
+    background-color: #1a1a1a;
+    border-right: 1px solid #262626;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+
+  .menubar button {
+    width: 100%;
+    padding: 20px 0;
+    border: none;
+    background: none;
+    color: #9ca3af;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .menubar button:hover {
+    background-color: #222;
+    color: white;
+  }
+
+.menubar button.active {
+  background-color: #2d2d2d;
+  color: white;
+  border-left: 4px solid #3b82f6;
+}
+
+.side-panel {
   width: 25%;
-  border-right: 1px solid #e5e7eb;
-  padding: 1rem;
   background-color: #1e1e1e;
-  color: #fff;
+  color: white;
+  border-right: 1px solid #262626;
+  overflow-y: auto;
 }
 
-.sidebar-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.sidebar-item {
-  padding: 0.75rem;
-  border-bottom: 1px solid #333;
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem;
   cursor: pointer;
-  transition: background 0.2s ease;
+  border-bottom: 1px solid #262626;
+  transition: background 0.2s;
 }
 
-.sidebar-item:hover {
+.chat-list-item:hover {
   background-color: #2a2a2a;
 }
 
-.sidebar-item.active {
+.chat-list-item.selected {
   background-color: #374151;
 }
 
-.sidebar-item-title {
-  font-weight: 600;
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 
-.sidebar-item-message {
-  font-size: 0.875rem;
+.status-dot.online {
+  background-color: #34d399;
+}
+
+.status-dot.offline {
+  background-color: #6b7280;
+}
+
+.chat-list-text h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.chat-list-text p {
+  margin: 0;
+  font-size: 0.85rem;
   color: #9ca3af;
 }
 
-.sidebar-item-time {
-  display: block;
-  font-size: 0.75rem;
-  color: #6b7280;
-  margin-top: 0.25rem;
-}
-
+/* ============================================
+   RIGHT CHAT WINDOW
+============================================ */
 .chat-main {
   flex: 1;
   display: flex;
@@ -56,17 +101,22 @@
   color: #fff;
 }
 
+/* -------- Chat Header -------- */
 .chat-header {
   padding: 1rem;
-  border-bottom: 1px solid #333;
   background-color: #1f2937;
+  border-bottom: 1px solid #333;
 }
 
 .chat-header-title {
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
+/* -------- Messages Area -------- */
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -79,10 +129,10 @@
 
 .chat-message {
   max-width: 60%;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   font-size: 0.95rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .chat-message.sent {
@@ -97,40 +147,53 @@
   color: black;
 }
 
+/* -------- Message Input -------- */
 .chat-input-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   padding: 1rem;
-  border-top: 1px solid #333;
   background-color: #1f2937;
+  border-top: 1px solid #333;
 }
 
 .chat-input {
   flex: 1;
-  border: 1px solid #4b5563;
+  padding: 0.7rem 1rem;
   border-radius: 9999px;
-  padding: 0.5rem 1rem;
-  outline: none;
-  font-size: 0.95rem;
+  border: 1px solid #4b5563;
   background-color: #111;
-  color: #fff;
+  color: white;
+  font-size: 1rem;
 }
 
 .chat-input:focus {
   border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
 }
 
 .chat-send-btn {
+  padding: 0.6rem 1.2rem;
   background-color: #2563eb;
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
   border: none;
+  border-radius: 9999px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
 }
+
 .chat-send-btn:hover {
   background-color: #1e40af;
+}
+
+.typing-indicator{
+  font-size: 1rem;
+  color: #9ca3af;
+  margin-left: 10px;
+  animation: blink 2s infinite;
+}
+@keyframes blink{
+  0%{opacity: 0.2;}
+  50%{opacity: 1;}
+  100%{opacity: 0.2;}
 }

@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Chat from './pages/Chat';
-import AuthRedirect from './component/authRedirect';
+import AuthRedirect from './components/AuthRedirect';
 function App() {
   
   return (

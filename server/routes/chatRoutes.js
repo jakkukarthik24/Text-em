@@ -8,14 +8,19 @@ router.get('/conversations',protect,async (req,res)=>{
         const response=await pool.query(
             `
             SELECT 
-            c.*,u.username AS other_username
+            c.*,
+            CASE 
+                WHEN c.user1_id=$1 THEN c.user2_id
+                ELSE c.user1_id
+            END AS other_user_id,
+            u.username AS other_username                    
              from conversations c
              JOIN users u ON
              (CASE
-                WHEN c.user1_id=$1 THEN c.user2_id=u.id
+                WHEN c.user1_id=$1 THEN c.user2_id=u.id         
                 WHEN c.user2_id=$1 THEN c.user1_id=u.id
              END)
-             where $1 IN(c.user1_id,c.user2_id)
+             where $1 IN(c.user1_id,c.user2_id) 
              ORDER BY c.last_message_time DESC
             `
             ,[userId]
@@ -67,6 +72,36 @@ router.post('/messages',protect,async (req,res)=>{
     }
     catch(err){
         res.status(500).json({message:'Error sending message'})
+    }
+})
+router.get('/user/:userId',protect,async (req,res)=>{
+    const {userId}=req.params;
+    try{
+        const response=await pool.query(
+            'SELECT id,username,email,created_at FROM users WHERE id=$1',
+            [userId]
+        );
+        if(response.rows.length===0){
+            return  res.status(404).json({message:'User not found'});
+        }
+        res.json(response.rows[0]);
+    }
+    catch(err){
+        res.status(500).json({message:'Error fetching user'})
+    }
+})
+router.get('/search/:query',protect,async (req,res)=>{
+    const {query}=req.params;
+    try{
+        const response=await pool.query(
+            'SELECT id,username FROM users WHERE username ILIKE $1 LIMIT 20',
+            [`%${query}%`]
+        );
+        res.json(response.rows);
+
+    }
+    catch(err){
+        res.status(500).json({message:'Error searching users'});
     }
 })
 export default router;
